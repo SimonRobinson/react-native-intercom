@@ -19,6 +19,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
+import io.intercom.android.sdk.Company;
 import io.intercom.android.sdk.Intercom;
 import io.intercom.android.sdk.UserAttributes;
 import io.intercom.android.sdk.identity.Registration;
@@ -212,7 +213,7 @@ public class IntercomModule extends ReactContextBaseJavaModule {
             callback.invoke(ex.toString());
         }
     }
-    
+
     @ReactMethod
     public void setBottomPadding( Integer padding, Callback callback) {
          Intercom.client().setBottomPadding(padding);
@@ -245,8 +246,15 @@ public class IntercomModule extends ReactContextBaseJavaModule {
                 // value should be a Map here
                 builder.withCustomAttributes((Map)value);
             } else if (key.equals("companies")) {
-                Log.w(TAG, "Not implemented yet");
-                // Note that this parameter is companies for iOS and company for Android
+                ReadableArray companies = (ReadableArray)value;
+                ReadableMap companyMap = companies.getMap(0);
+                String companyId = companyMap.getString("id");
+                String companyName = companyMap.getString("name");
+                Company company = new Company.Builder()
+                        .withName(companyName)
+                        .withCompanyId(companyId)
+                        .build();
+                builder.withCompany(company);
             }
         }
         return builder.build();

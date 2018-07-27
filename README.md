@@ -29,7 +29,7 @@ Run `npm install react-native-intercom`
 ### IOS
 
 More instructions here: [Intercom for iOS](https://github.com/intercom/intercom-ios)
- 
+
 Initialize Intercom in your `AppDelegate.m`
 ```
 #import "Intercom/intercom.h"
@@ -65,7 +65,7 @@ public class MainApplication extends Application {
     Intercom.initialize(this, "your api key", "your app id");
     // ...
   }
-  
+
   public List<ReactPackage> getPackages() {
     return Arrays.<ReactPackage>asList(
         // ...
@@ -87,7 +87,7 @@ And in your *AndroidManifest.xml* should look like
           ...
     >
 
-  <application 
+  <application
 	       ...
 	       >
 
@@ -108,7 +108,7 @@ And in your *AndroidManifest.xml* should look like
         android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver"
         tools:replace="android:exported"
         android:exported="true" />
-	
+
   </application>
 </manifest>
 ```
@@ -150,8 +150,9 @@ Intercom.updateUser({
     signed_up_at: 1004,
     unsubscribed_from_emails: true,
     companies: [{
-        // Only supported for iOS now
-        // Parameters: IntercomUserAttribtesBuilder.m -> companyForDictionary()
+      company_id: 'your company id',
+      name: 'your company name'
+      // Parameters: IntercomUserAttribtesBuilder.m -> companyForDictionary()
     }],
     custom_attributes: {
         my_custom_attribute: 123
